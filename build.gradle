@@ -1,15 +1,23 @@
+
 plugins {
-    id 'java' // 자바
-    id 'org.springframework.boot' version '3.5.4' // 스프링부트 버전
-    id 'io.spring.dependency-management' version '1.1.7' // 스프링 의존성 버전
+    id 'java'
+    id 'org.springframework.boot' version '3.5.5'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
     }
 }
 
@@ -18,18 +26,14 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web' //스프링부트 웹 설치
-    runtimeOnly 'com.mysql:mysql-connector-j' //MYSQL JDBC 라이브러리 설치
-    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"  // JSP 라이브러리 설치
-    // lombok 롬복 라이브러리 설치
+    // [1] 스프링 웹
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // [2] 롬복
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    // [3] mysql jdbc
+    runtimeOnly 'com.mysql:mysql-connector-j'
 }
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-Xlint:unchecked"
-}
-
 
 tasks.named('test') {
     useJUnitPlatform()
