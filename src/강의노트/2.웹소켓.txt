@@ -45,10 +45,15 @@
 
             @Override
             public void registerWebSocketHandlers(WebSocketHandlerRegistry registry){
-                registry.addHandler( chatHandler , "/chat");
+                registry.addHandler( 서버웹소켓객체 , "/chat");
             }
-
         }
+
+        4. 클라이언트 JS 웹 소켓 구현
+            주의할점 : 브라우저마다 클라이언트소켓(**세션저장소**) 별도의 객체로 사용된다.
+            1) 서버 웹소켓 경로부터 클라이언트 웹소켓 구현
+
+            2)
 
 
 
