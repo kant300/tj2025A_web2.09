@@ -27,4 +27,10 @@ public class CrawlingController {
         return crawlingService.task2();
     }
 
+    // 3. 날씨 정보
+    @GetMapping("/craw3")
+    public  Map<String ,String > task3(){
+        return crawlingService.task3();
+    }
+
 }
