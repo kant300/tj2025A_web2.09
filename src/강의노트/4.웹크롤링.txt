@@ -26,7 +26,7 @@
         1) 크로링할 웹주소의 HTML를 자바의 Document 객체로 가져오기
             Document document = Jsoup.connect ( 크롤링할웹주소 ).get()
         2) 특정한 마크업(요소) 가져오기 , 1개일때 : Element / N개일때 : Elements
-            Element element = document.select("css선택자" );
+            Element element = document.selectFirst("css선택자" );
                 예] < a href=""> 부평역 </a>
             Elements elements = document.select("css선택자" );
                 예] < a href=""> 부평역 </a> , < a href=""> 부천역 </a>

@@ -27,7 +27,7 @@ public class CrawlingService {
             // 1-3 : ********************** 가져올 HTML 식별자  .select("CSS선택자"); ************************
             // JS : document.querySelect("CSS선택자" );
             // JSOUP :  document.select("CSS선택자" );
-            Elements aList = document.select(".titles > a");  // 'title'이라는
+            Elements aList = document.select(".titles > a");  // 'title'이라는 class 명을 가진 마크업 바로 아래 <a> 마크업
             System.out.println("aList = " + aList);
             // 1-4 : 가져온 마크업등ㄹ을 반복하여 텍스트만 추출. text()
             for(Element a : aList ){
@@ -44,12 +44,10 @@ public class CrawlingService {
     // 2. 상품정보 : 예스24 , https://www.yes24.com/robots.txt , +DB +CSV +@스케줄링
     public List<Map<String, String >> task2(){
         //2-1 :  책정보들을 담을 리스트
-        List< Map< String, String >> list = new ArrayList<>();
+        List< Map< String, String >> list = new ArrayList<>(); // 2-1 : 책 정보들을 담을 리스트 선언
         try{
             for( int page = 1 ; page <= 3 ; page++ ) { // page를 1부터 3까지 반복
-
-
-                // 2-2 : 웹크롤링할 주소
+                // 2-2 : 웹크롤링할 주소 , 페이징처리 크롤링
                 String URL = "https://www.yes24.com/product/category/daybestseller" +
                         "?categoryNumber=001" +
                         "&pageNumber="+page+ // 1페이지 대신에 변수를 넣어서 여러번 크롤링
@@ -75,18 +73,19 @@ public class CrawlingService {
         } catch (Exception e) {
             System.out.println( "e = " + e);
         }
-        return list;
+        return list;  // 리스트 반환 end
     }
 
-    // 3. 다음날씨 정보 https://weather.daum.net/robots.txt
+    // 3. 실행불가능=(JSOUP 한계를 보여주는예제) 다음날씨 정보 https://weather.daum.net/robots.txt ***** 동적 페이지 JSOUP 안된다. --> 방안 : 셀레니움 *****
     public Map<String,String> task3(){
-        Map<String ,String > map = new HashMap<>(); // 3-1 날씨 정보를
+        Map<String ,String > map = new HashMap<>(); // 3-1 날씨 정보를 저장할 맵
         try{
-            String URL ="https://weather.daum.net/"; // 3-2
-            Document document = Jsoup.connect( URL ).get(); // 3-3-
+            String URL ="https://weather.daum.net/"; // 3-2 날씨 정보를 가져올(크롤링) 주소
+            Document document = Jsoup.connect( URL ).get(); // 3-3 JSOP 활용한 지정한 주소 HTML로 가져오기
             System.out.println("document = " + document);
             // 3-4 온도( .info_weather .num_deg )
             Elements elements = document.select( ".info_weather .num_deg" );
+            // 즉] '.info_weather' 마크업은 JS가 데이터를 표시하는 방법이므로 크롤링 불가능
 
             System.out.println("elements = " + elements);
         } catch (Exception e) {

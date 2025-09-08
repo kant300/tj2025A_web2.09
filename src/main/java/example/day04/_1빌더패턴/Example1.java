@@ -18,7 +18,8 @@ class MemberDto{
         this.name = name;
         this.age = age;
     }
-}
+    // 3. 메소드 : (함수) 객체의 행동/이벤트/함수
+}// class e
 
 // (1) 실행 클래스
 public class Example1 {
