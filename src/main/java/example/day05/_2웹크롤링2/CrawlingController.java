@@ -25,7 +25,7 @@ public class CrawlingController {
 
     // 2.
     @GetMapping("/crawling2")
-    public List<String > task2(){
+    public List<String> task2(){
         return crawlingService.task2();
     }
 

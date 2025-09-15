@@ -50,24 +50,25 @@ public class CrawlingService {
                 wait.until(ExpectedConditions.presenceOfElementLocated( By.cssSelector( ".wrap_weather .txt_sub" ) ) );
         System.out.println("status = " + status);
             // (4) 미세먼지, .list_air .item_air
-//        WebElement status =
-//                wait.until(ExpectedConditions.presenceOfElementLocated( By.cssSelector( ".wrap_weather .txt_sub" ) ) );
-        // 1-8 : 크롤링한 요소( HTML마크업)의 텍스트를 추출하여
+        WebElement air =
+                wait.until(ExpectedConditions.presenceOfElementLocated( By.cssSelector( ".list_air .item_air" ) ) );
+        // 1-8 : 크롤링한 요소( HTML마크업)의 텍스트를 추출하여 map/dto 저장
         Map<String ,String > map = new HashMap<>();
         map.put( "위치" , location.getText() ); // .put( "key" , value );
         map.put( "온도" , temp.getText() );
         map.put( "상태" , status.getText() );
+        map.put( "미세먼지" , air.getText() );
 
         // 1-9 : 셀레니움(웹드라이버) 수동 종료
         webDriver.quit();
-        return map; // 반환
-    }
+        return map; //  구성한 map 반환
+    }// func e
 
     // 2. CGV영화리뷰(+무한스크롤링)
     public List<String> task2(){
         // 2-1 : 크롬설치
         WebDriverManager.chromedriver().setup();
-        // 2-2 : 크롬 옵션
+        // 2-2 : 크롬 옵션 , 브라우저 창 사용안함
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless=new" , "--disable-gpu");
         // 2-3 : 셀레니움(웹드라이버) 객체 생성 , 2-1부터 2-3까지는 복붙
@@ -76,32 +77,37 @@ public class CrawlingService {
         String URL = "https://cgv.co.kr/cnm/cgvChart/movieChart/89833";
         // 2-5 : 셀레니움(웹드라이버)으로 크롤링할 웹주소 가져오기
         webDriver.get( URL );
-        // =================== 자바에서 JS 사용 ================== //
 
         List<String > list = new ArrayList<>();
-        // =============== 아래 작업들을 N번 반복 =============== //
+        // 2-9 : =============== 아래 작업들을 N번 반복 =============== //
         for( int i = 1; i<= 5 ; i++){
             // 2-6 : 리뷰( .reveiwCard_txt__RrTgu)를 여러개 가져오기
             // 1개 : WebDriver element = webDriver.findElement();
             // N개 :List<WebElement> elements = webDriver.findElements();
 
             List<WebElement> webElements
-            = webDriver.findElements( By.cssSelector(".reveiwCard_txt__RrTgu") ); // 스크롤내리면 누적된다.
+                = webDriver.findElements( By.cssSelector(".reveiwCard_txt__RrTgu") ); // 스크롤내리면 누적된다.
         // 2-7 : 가져온 리뷰들을 리스트에 담아보기
-
+        int startCount = list.size();
         for( WebElement element : webElements ){ // 여러개 리뷰 요소들을 하나씩 조회
             String text = element.getText(); // 현제 조회중인 요소의 텍스트(리뷰) 가져오기
-            // 만약에 스크롤 내리고 앞전의 리뷰와 같다면
+            if( list.contains( text ) ) { // [중복방지] ** 만약에 스크롤 내리고 리스트내 앞전의 리뷰가 포함되면 생략/패스 **
+                continue; // 가장 가까운 반복문으로 이동 -> 2-7
+            }
+            //if( text.isEmpty() ) //
             list.add(text);
         }
+        // ** 만약에 비어있거나 list에 추가적인 내용이 없으면 2-9 반복문 종료
+        int endCount = list.size();
+        if( startCount == endCount ) break;
+
         // =========== 자바에서 JS 사용 : 스크롤을 내리는 작업 ============== //
         // 2- : 자바스크립트 조작하는 객체 , 셀레니움객체를 자바스크립트 실행객체로 변환
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
         // document.body( 화면 )에서 최하단으로 스크롤 이동
         js.executeScript("window.scrollTo( 0 , document.body.scrollHeight);");
-        try{ Thread.sleep( 1000 ); } catch ( Exception e ) {} // 1초 대기
+        try{ Thread.sleep( 2000 ); } catch ( Exception e ) {} // 1초 대기
         }
         return list;
-
     }// func e
 }// class e
