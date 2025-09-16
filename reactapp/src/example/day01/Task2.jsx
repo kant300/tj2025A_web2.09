@@ -6,24 +6,27 @@
 
   // [1] 해당 .jsx 파일내 대표(default) 컴포넌트 만들기
   export default function Task2( props ){
+    // InfoCard함수의 매개변수로 아무거나속성명 사용
     return(<>
         <div>
-            <ul>
-                <li> { products[0].title }</li>
-                <li> { products[0].price }</li>
-                <li> { products[0].inStock == true ? '재고있음' : '재고없음' } </li>
-            </ul>
-            <ul>
-                <li> { products[1].title }</li>
-                <li> { products[1].price }</li>
-                <li> { products[1].inStock == true ? '재고있음' : '재고없음' } </li>
-            </ul>
-            <ul>
-                <li> { products[2].title }</li>
-                <li> { products[2].price }</li>
-                <li> { products[2].inStock == true ? '재고있음' : '재고없음' } </li>
-            </ul>
+            { /* 하위 컴포넌트 호출과 동시에 props 속성 자료 전달 */}
+            <InfoCard 아무거나속성명 = { products[0] } />
+            <InfoCard 아무거나속성명 = { products[1] } />
+            <InfoCard 아무거나속성명 = { products[2] } /> 
+
         </div>
         </>)
   }
+
+  // [2] 하위 컴포넌트 : 제품1개당 정보 구성하는 컴포넌트
+  function InfoCard( props ){
+    return (<>
+            <ul>
+                <li> { props.아무거나속성명.title }</li>
+                <li> { props.아무거나속성명.price.toLocaleString() }</li>
+                <li> { props.아무거나속성명.inStock == true ? '재고있음' : '재고없음' } </li>
+            </ul>
+        </>)
+  }
+
 
