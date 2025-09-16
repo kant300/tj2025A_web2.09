@@ -9,12 +9,12 @@
 // (6) jsx파일내 export default 함수를 1개만 정의한다.
 
 // [1] 메인페이지
-function Component2 = ( props ){
+function Component2  ( props ){
     const name = "유재석"; // JS코드
     // return 뒤로  html 작성
     return <div> <Header /> 메인페이지 <Footer /> </div> 
 }//  func end
-
+export default Component2;
 // [2] 헤더페이지
 function Header( props ){
     return <div> 헤더 메뉴 </div>

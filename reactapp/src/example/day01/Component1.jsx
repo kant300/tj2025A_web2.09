@@ -11,7 +11,7 @@
         5. 다른(main.jsx) 파일에서 해당 컴포넌트를 import 할수 있게 export 정의한다.
 */
 // [1] 컴포넌트 생성
-function component1(){
+function Component1(){
     
     return <h1> 내가 만든 첫 컴포넌트</h1>
 }// func end
