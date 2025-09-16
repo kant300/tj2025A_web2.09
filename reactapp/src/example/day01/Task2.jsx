@@ -14,18 +14,18 @@
     return(<>
         <div class="products">
             { /* 하위 컴포넌트 호출과 동시에 props 속성 자료 전달 */}
-            <InfoCard product = { products[0] } />
-            <InfoCard product = { products[1] } />
-            <InfoCard product = { products[2] } /> 
-
+            <InfoCard 
+                title = { products[0].title } 
+                price = { products[0].price } 
+                inStock = { products[0].inStock } 
+            />
         </div>
         </>)
   }
 
   // [2] 하위 컴포넌트 : 제품1개당 정보 구성하는 컴포넌트
-  function InfoCard( props ){
+  function InfoCard( { title, price, inStock } ){
     // 구문분해, props 현재상태 : { product : { title, price, inStock } }
-    const { title, price, inStock } = props.product
     return (<>
             <ul>
                 <li><h3> { title } </h3> </li>
