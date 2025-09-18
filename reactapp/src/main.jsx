@@ -71,4 +71,8 @@ import Task3 from './example/day02/Task3.jsx';
 
 // day02 Task4
 import Task4 from './example/day02/Task4.jsx';
-create.render( <Task4 /> )
+// create.render( <Task4 /> )
+
+// day02 Taske4
+import Taske4 from './example/day02/Taske4.jsx';
+create.render( <Taske4 />  )
