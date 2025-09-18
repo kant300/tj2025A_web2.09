@@ -38,6 +38,7 @@ export default function Component10( props ){
         // ** 6-2 ** : [4] 함수를 재실행하여 axios 와 재렌더링한다.
         // boardPrint();
     }
+    // 
         
     return(<>
         <h3> 스프링 서버의 boardservice13(day07) 통신 </h3>
