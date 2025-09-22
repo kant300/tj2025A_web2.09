@@ -88,5 +88,11 @@ import Task5 from './example/day03/Task5.jsx';
 // create.render( <Task5 /> )
 
 // movie
-import movie from './example/movie/movie.jsx';
-create.render( <Movie /> )
+import Movie from './example/movie/movie.jsx';
+
+// day04
+import Component11 from './example/day04/Component11.jsx';
+//create.render( <Component11 /> );
+import Component12 from './example/day04/Component12.jsx';
+create.render(<Component12 />);
+
