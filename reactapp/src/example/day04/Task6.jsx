@@ -1,6 +1,7 @@
-import { BrowserRouter, Link, Route , Routes } from 'react-router-dom'
+import { BrowserRouter, Link, Route , Routes, useNavigate } from 'react-router-dom'
 // [1] CSS 가져오기
 import './Task6.css'
+import { useRef } from 'react';
 // [3] 홈 컴포넌트
 function Home( props ){
     return(<> <h3> 홈 페이지 </h3></>)
@@ -8,12 +9,57 @@ function Home( props ){
 
 // [4] 회원가입 컴포넌트
 function Singup( props ){
-    return(<> <h3> 회원가입 페이지 </h3></>)
+    // [4-1] 입력상자들을 참조하는 useRef
+    const idRef = useRef( null );
+    const pwdRef = useRef( null );
+    // [4-3] 라우터 전용 페이지 전환 함수
+    const navigate = useNavigate();
+    // [4-2] 특정한 이벤트에서 참조중인 useRef current 확인하기
+    const 회원가입 = async()=> { console.log( idRef.current.value );
+        // 
+        //
+        const id = idRef.current.value; //
+        const pwe = pwdRef.current.value; 
+        const obj = { id, pwe };
+        // * axios 를 이용한 서버(스프링) 통신했다 치고 가정하고. *
+        alert('[회원가입 성공');
+        location.href="/login"  // 라우터방식이 아닌 고적적인 HTML방식으로 새로고침된다<div className=""></div>
+        navigate('/login'); // 라우터 방식
+    }
+
+    return(<> <h3> 회원가입 페이지 </h3>
+        <input ref={ idRef } /> <br/>
+        <input ref={ pwdRef } /> <br/>
+        <button onClick={ 회원가입 }> 회원가입 </button>
+    </>)
+
 }
 
 // [5] 로그인 컴포넌트
 function Login( props ){
-    return(<> <h3> 로그인 페이지 </h3></>)
+    
+    // [5-1] 입력받은 정보들을 갖는 form 참조하는 useRef
+    const formRef = useRef( null );
+    // [5-2] 특정한 이벤트/함수에서 참조중인 useRef current 확인하기
+    const 로그인 = async()=> { console.log( formRef.current );
+        const id = formRef.current.elements['id'].value;
+        const pwd = formRef.current.elements['pwd'].value;
+        // ** axios 했다 가정하고 **
+        //if( id == "admin" && pwd == "1234" ){
+            alert('[로그인 성공]'); 
+            navigate('/');
+        //}
+    }
+    return(<> 
+        <h3> 로그인 페이지 </h3>
+        <form ref={ formRef }>
+            <input name="id" /> <br/>
+            <input name="pwd" /> <br/>
+            <button onClick={ 로그인 } type='button'> 로그인 </button>
+        </form>
+
+
+    </>)
 }
 
 
