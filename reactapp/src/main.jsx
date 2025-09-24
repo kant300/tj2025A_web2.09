@@ -100,14 +100,19 @@ import Task6 from './example/day04/Task6.jsx';
 // create.render( <Task6 /> )
 
 //day05
-import Component13 from './example/day05/Component13.jsx';
-// [1] 내가 만든 스토어(여러개 상태(전역변수)리듀서를 갖는 저장소) import 불러오기
-import store from './example/day05/store.jsx';
-// [2] Store 사용할 곳에 store 공급해주기, <Provider store={ 내가만든스토어 }>
-import { Provider } from "react-redux";
-// * 주의할점 : dispatch 보다 먼저 'Provider' 실행되어야 한다. 
-// 관례적으로 main.jsx 에서 공급한다. Provider로 감싼다.
-create.render( 
-  <Provider store={ store }>
-    <Component13 /> 
-  </Provider>);
+// import Component13 from './example/day05/Component13.jsx';
+// // [1] 내가 만든 스토어(여러개 상태(전역변수)리듀서를 갖는 저장소) import 불러오기
+// import store from './example/day05/store.jsx';
+// // [2] Store 사용할 곳에 store 공급해주기, <Provider store={ 내가만든스토어 }>
+// import { Provider } from "react-redux";
+// // * 주의할점 : dispatch 보다 먼저 'Provider' 실행되어야 한다. 
+// // 관례적으로 main.jsx 에서 공급한다. Provider로 감싼다.
+// create.render( 
+//   <Provider store={ store }>
+//     <Component13 /> 
+//   </Provider>);
+
+// day05 실습7
+import App from './example/day05/실습7/App.jsx';
+
+create.render( <App /> );
