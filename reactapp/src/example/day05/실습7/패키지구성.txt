@@ -1,9 +1,9 @@
 day05
 --> 실습7
-----> components    : 컴포넌트 들을 저장하는 폴더
+----> components    : 컴포넌트 들을 저장하는 폴더(일부)
     -> Header.jsx
 
-----> pages         : page 컴포넌트들을 저장하는 폴더
+----> pages         : page 컴포넌트들을 저장하는 폴더(전체)
     -> HomePage.jsx
     -> LoginPage.jsx
     -> ProfilePage.jsx

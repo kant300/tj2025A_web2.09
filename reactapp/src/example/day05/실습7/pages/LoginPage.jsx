@@ -1,5 +1,8 @@
 
 export default function LoginPage(props){
+    // 1. 로그인 처리 함수 정의 : axios 생략
+    const onLogin = asyne()=>{
+        alert('[로그인 성공]');
     const { isAuthenticated } = useSelector( (state)=> state.user );
     console.log( isAuthenticated )
 
