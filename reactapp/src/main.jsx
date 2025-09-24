@@ -127,3 +127,5 @@ create.render(
     </PersistGate>
   </Provider>
 );
+
+// day06 실습8
