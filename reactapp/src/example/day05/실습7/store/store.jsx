@@ -17,8 +17,8 @@ import storageSessin from "redux-persist/lib/storage/session"; // session 사용
 const persistConfig = { key : 'user', storage } // localStorage에 'user'라는 이름으로 상태저장
 
 // [5] 리듀서에 persist 설정 적용, persistReducer(presist 옵션, 설정할 리듀서);
-import { presistStore, presistReducer } from 'redux-persist';
-const presistedReducer = persistReducer( persistConfig, userSlice);
+import { persistStore, persistReducer } from 'redux-persist';
+const persistedReducer = persistReducer( persistConfig, userSlice);
 
 
 // [1] 스토어 만들기
