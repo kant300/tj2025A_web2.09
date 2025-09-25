@@ -129,3 +129,5 @@ create.render(
 );
 
 // day06 실습8
+// import App from './example/day06/App.jsx';
+// create.render( <App />)
