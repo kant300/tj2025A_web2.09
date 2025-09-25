@@ -52,11 +52,11 @@ class AopClass{
     }
     // [4-5] @AfterReturning( return ) 리턴갑을 반환받을 수 있다.
     @AfterReturning(
-            value = "execution( boolean example.day08.AopService.enter3(..) )" ,
+            value = "execution( * example.day08.AopService.enter3(..) )" ,
             returning =  "result"   // 리턴값을값을 매핑/바인딩할 이름 정의
             )
-    -
-    public void check5 ( boolean result ){
+
+    public void check5 ( Object result ){
         System.out.println("[4-5] enter3에서 AOP [반환값] : " + result );
     }
 
