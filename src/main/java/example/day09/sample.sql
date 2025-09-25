@@ -89,3 +89,6 @@ CREATE TABLE trans(
     name VARCHAR(255) NOT NULL,
     money INT UNSIGNED DEFAULT 0
 );
+INSERT INTO trans (name, money) VALUES
+('신동엽', 200000),
+('서장훈', 200000);
