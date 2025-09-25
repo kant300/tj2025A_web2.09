@@ -55,6 +55,7 @@ class AopClass{
             value = "execution( boolean example.day08.AopService.enter3(..) )" ,
             returning =  "result"   // 리턴값을값을 매핑/바인딩할 이름 정의
             )
+    -
     public void check5 ( boolean result ){
         System.out.println("[4-5] enter3에서 AOP [반환값] : " + result );
     }
