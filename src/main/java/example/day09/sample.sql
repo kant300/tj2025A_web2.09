@@ -81,6 +81,7 @@ INSERT INTO board (bcontent, bwriter) VALUES ('헬스장 다녀왔어요', '제�
 INSERT INTO board (bcontent, bwriter) VALUES ('오늘도 화이팅!', '리사');
 INSERT INTO board (bcontent, bwriter) VALUES ('운전 조심하세요~', '태연');
 
+
 select * from board;
 
 
@@ -89,6 +90,6 @@ CREATE TABLE trans(
     name VARCHAR(255) NOT NULL,
     money INT UNSIGNED DEFAULT 0
 );
-INSERT INTO trans (name, money) VALUES
+INSERT INTO trans (name, money) VALUES 
 ('신동엽', 200000),
 ('서장훈', 200000);
