@@ -1,11 +1,17 @@
 package example.실습.실습3;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
-@SpringBootApplication
+@Mapper
 public interface BookMapper {
-    public static void main(String[] args) {
-        SpringApplication.run(AppStart.class);
-    }
+    // 1. 책 재고 차감
+    @Update("update books set stock = stock-1 where id=#{bookid} and stock > 0")
+    int decStock(int bookid );
+    // 2. 책 대여 기록
+    @Insert("insert into rentals (book_id, member) values (#{ bookid } ,#{ member }")
+    int insertRental( int bookid , String member );
+
+
 }
