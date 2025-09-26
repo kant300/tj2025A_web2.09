@@ -20,7 +20,14 @@ public class BookController {
     public ResponseEntity<Boolean> rent(
             @RequestBody Map< String, Object > body ){
 
-        boolean result = bookService.rent( body );
-        return ResponseEntity.ok( result );
+        boolean result = false;
+        try{
+            result = bookService.rent( body );
+            // 만약에 커밋이면
+            return ResponseEntity.ok( result );
+        }catch (RuntimeException e){
+            // 만약에 롤백이면
+            return ResponseEntity.status( 405 ).body( result );
+        }
     }
 }
