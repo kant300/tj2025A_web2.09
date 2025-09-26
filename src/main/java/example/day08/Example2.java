@@ -1,9 +1,7 @@
 package example.day08;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
 
 // [4] AOP 커스텀
 @Aspect // AOP 클래스를 스프링 AOP 컨테이너에 등록, AOP 설정하겠다는 어노테이션
@@ -50,17 +50,33 @@ class AopClass{
     public void check4( String  name ){
         System.out.println("[4-4] enter3에서 AOP [매개변수] :" + name );
     }
-    // [4-5] @AfterReturning( return ) 리턴갑을 반환받을 수 있다.
+    // [4-5] @AfterReturning( returning = "바인딩할변수명" ) 리턴값을 반환받을 수 있다.
     @AfterReturning(
             value = "execution( * example.day08.AopService.enter3(..) )" ,
             returning =  "result"   // 리턴값을값을 매핑/바인딩할 이름 정의
             )
-
     public void check5 ( Object result ){
         System.out.println("[4-5] enter3에서 AOP [반환값] : " + result );
     }
 
-}
+    // [4-6] 개발자가 직접 메소드를 실행하는 시점
+    @Around("execution( * example.day08.AopService.enter3(..) )")
+    public Object check6(ProceedingJoinPoint joinPoint ) throws Throwable {
+
+        // 리턴타입을 * 했으므로 모든 자료들을 저장하기 위해 Object
+        // 매개변수에는 'ProceedingJjoinPoint'라는 비지니스로직과 조합
+        System.out.println( "[4-6] joinPoint객체 :" + joinPoint ); // 1. 객체확인
+        System.out.println( "[4-6] joinPoint실행할 메소드명 :" + joinPoint.getSignature() ); // 2. 해당 AOP 메소드를 실행한 대상(메소드) 확인
+        System.out.println( "[4-6] 실행할 메소드의 인자들 :" + Arrays.toString( joinPoint.getArgs() ) );// 3. 실행한 대상(메소드) 매개변수 인자들(배열) 확인
+        // [Ljava.lang.Object;@40cfdbda ---> Arrays.toString( 배열 ) -->  [유재석]
+        Object result = // 실행 결과를 반환도 받을 수 있다.
+        joinPoint.proceed();    // 4. 실행할 대상 메소드를 직접 실행( 실행시점 커스텀 가능 ), *예외처리*
+        System.out.println( "[4-6]실행후 메소드의 반환값 : " + result );
+        return  result; // 5. 실행할 대상 메소드의 리턴값을 그대로 리턴 해야 한다.
+    }
+
+
+}// class end
 
 // [3] 간단한 서비스
 @Service class AopService{
