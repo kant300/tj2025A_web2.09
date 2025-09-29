@@ -12,6 +12,4 @@ public interface BookMapper {
     // 2. 책 대여 기록
     @Insert("insert into rentals (book_id, member) values (#{ bookid } ,#{ member }")
     int insertRental( int bookid , String member );
-
-
 }

@@ -1,7 +1,6 @@
 package example.실습.실습3;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +11,11 @@ import java.util.Map;
 public class BookService {
     private final BookMapper bookMapper;
 
-    //
-    //
+    // 1. 책 재고 차감하고 책대여기록 하는데 하나의 흐름으로 구성한다.
+    // 즉] 하나라도 SQL문제가 발생하면 전체 취소한다. 트랜잭션
     @Transactional // 트랜잭션 발동조건 : 실행예외
     public boolean rent( Map<String, Object> body ){
+        // * MAP : 타입변환
         int bookid = Integer.parseInt( String.valueOf(body.get("bookid")));
         String  member = String.valueOf(body.get("member"));
         // 1-1 책 재고 차감
