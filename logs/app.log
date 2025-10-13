@@ -9885,3 +9885,5 @@ Unconditional classes:
 2025-10-13T11:38:30.429+09:00 DEBUG 10756 --- [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-10-13T11:38:30.430+09:00 DEBUG 10756 --- [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Mon Oct 13 11:38:30 KST 2025, status=405, error=Method Not Allowed, path=/xml}]
 2025-10-13T11:38:30.442+09:00 DEBUG 10756 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 405
+2025-10-13T11:38:53.885+09:00 DEBUG 10756 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-10-13T11:38:53.885+09:00 DEBUG 10756 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
