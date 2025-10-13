@@ -1,6 +1,5 @@
 package example.day13;
 
-import example.day06.StudentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,8 @@ public class XmlController {
 
     // # 2. 전체조회
     public ResponseEntity< ? > findAll(){
-        List<String> result
+        List<StudentDto> result = xmlMapper.findAll();
+        return ResponseEntity.ok( result);
     }
 
 }// class e
