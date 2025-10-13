@@ -1,18 +1,35 @@
 package example.day13;
 
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
 
-// # 1. 등록
-// Mybatis에서 SQL매핑하는 방법
-// 방법1 : 추상메소드 위에 @Insret("SQL") 작성 , 간단한 SQL 권장
-// 방법2 : 추상메소드를 매핑하는 XML파일에서  SQL 작성,  복잡한 SQL 권장
+
 @Mapper
 public interface XmlMapper {
+    // # 1. 등록
+    // Mybatis에서 SQL매핑하는 방법
+    // 방법1 : 추상메소드 위에 @Insret("SQL") 작성 , 간단한 SQL 권장
+    // 방법2 : 추상메소드를 매핑하는 XML파일에서  SQL 작성,  복잡한 SQL 권장
+
+    // [ 생성된 PK 값 반환하는 방법 ]
+    // @Insert("INSERT INTO student(name, kor, math) VALUES( #{name} , #{kor}, #{math} );")
+    // @Options( useGeneratedKeys = true, keyProperty = "sno") // 생성된 PK를 sno 필드에 매핑
     int save(StudentDto dto);
 
     // # 2. 전체조회
     List<StudentDto> findAll();
+
+    // # 3. 개별 학생 조화
+    StudentDto find (int sno );
+
+    // # 4. 개별 학생 삭제
+    int delete ( int sno );
+
+    // # 5. 개별 학생 수정
+    int update( StudentDto studentDto );
+
 }// i end
