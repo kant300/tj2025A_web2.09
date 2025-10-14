@@ -36,6 +36,21 @@
             Map/Dto/List : select 조회결과 레코드 자료들을 반환
         * 주의할점 : 매핑할 레코드의 컬럼명과 자바의 속성명은 일치해야 한다.
 
+[ 스프링 SQL 자동 실행 파일 ]
+    1. resource 폴더 아래 2개 SQL 파일 작성
+        1) sechma.sql : DDL SQL , 주로 drop/create
+            - 테이블생성/삭제 코드 작성
+            - 데이터베이스 생성/삭제 안된다.
+            - 서버 실해이 자동 실행되므로 DROP TABLE 먼저 작성한다.
+            - *관계참고*일때는 FK 테이블 먼저 DROP 한다.
+        2) data.sql : DML SQL , 주로  insert
+            - 샘플 데이터 코드 작성
+    2. application.properties 설정
+        1) spring.sql.init.mode = always(항상실행:개발단계) / never(실행안함:운영단계)
+        2) spring.sql.init.schema-locations=classpath:/폴더명/schema.sql
+        3) spring.sql.init.data-locations=classpath:/폴더명/data.sql
+        * classpath : [resource]폴더 이하경로
+
 
 
 
