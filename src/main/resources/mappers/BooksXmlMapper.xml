@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML 이란? 마크업 이용한 데이터 저장(설정)/전달(매핑)/교환(API) 마크업언어 -->
+<!-- HTML : 마크업 이용한 웹페이지 마크업언어 -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- XML 파일내 mybatis 라이브러리 설정 -->
+
+<!-- xml과 매핑할 인터페이스 설정 , [src->java] 이하 경로 지정  -->
+<!-- <mapper namespace="매핑할 인터페이스 파일경로"> -->
+<mapper namespace="example.실습.실습4.BooksXmlMapper">    <!-- mapper 시작 -->
+
+    <!-- 등록 -->
+    <insert id="save" parameterType="example.실습.실습4.BooksDto" useGeneratedKeys="true" keyProperty="bno">
+        insert into books(id, title, stock) values( #{id} , #{title} , #{stock} );
+    </insert>
