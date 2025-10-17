@@ -13,7 +13,7 @@ UPDATE trans SET money = money + 30000 where name = '서장훈'; -- 입금
 ROLLBACK;
 # 4. 완료
 COMMIT;
-# 5. 확인 : (1) 1 -> 2 -> 4-> 5
+# 5. 확인 : (1) 1 -> 2 -> 4-> 5  (2) 1-> 2 -> 3(rollback) -> 5
 select * from trans;
 
 # [2] 
@@ -39,7 +39,7 @@ select * from trans;
 # [3] 
 start transaction;
 # 1.
-update trans set money = money - 10000 where name = '유재석';
+update trans set money = money + 10000 where name = '유재석';
 savepoint step1;
 # 2. 
 update trans set money = money - 10000 where name = '서장훈';
@@ -53,4 +53,3 @@ rollback to step2; commit;# (1)(2) 까지 반영
 rollback to step3; commit;# (1)(2)(3) 까지 반영
 
 # 실무 : 신입/주니어개발자, 데이터베이스 데이터 수정 권한 , view(프론트엔드/가상테이블/)
-ROLLBACK TO step1;
