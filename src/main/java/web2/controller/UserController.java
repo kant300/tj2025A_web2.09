@@ -24,7 +24,7 @@ public class UserController {
         return ResponseEntity.ok( result );     // ok(200 성공의 의미)
     }
 
-    // 2-1. 로그인(+세션 : 자바웹서버(톰캣)의 임시저장소, 한번 로그인 성공했다는 증거 )
+//    // 2-1. 로그인(+세션 : 자바웹서버(톰캣)의 임시저장소, 한번 로그인 성공했다는 증거 )
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody UserDto userDto, HttpSession session) {
 //        UserDto result = userService.login( userDto);
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     // 3. 현재 로그인된 정보 호출( + 마이페이지 )
-    @GetMapping("/myinfo")
+    @GetMapping("/info")
     public ResponseEntity<?> myInfo( HttpServletRequest request ) { // 쿠키 활용한 로그인 상태를 확인ㄹ
         // 3-1 : 현재 클라이언트(브라우저)저장된 모든 쿠키 가져오기
         Cookie[] cookies = request.getCookies();
