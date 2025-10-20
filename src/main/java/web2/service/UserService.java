@@ -13,6 +13,7 @@ public class UserService {
     private  final UserMapper userMapper;
     // 1-2 : 비크립트 라이브러리 객체 주입
     private final BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+
     // 1. 회원가입
     public int signup(UserDto userDto){
         // 1-3 : 회원가입 하기전에 비크립트를 이용한 비밀번호 암호화(사람이 이해하기 어려운 데이터로 변경) 하기
@@ -30,21 +31,27 @@ public class UserService {
 
     // 2 로그인 : 암호문을 해독하여 평문을 비교하는 방식이 아닌 비교할 대상을 암호화해서 암호문 비교
     public UserDto login(UserDto userDto){
-        // 2-1 :
+        // 2-1 : 현재 로그인에서 입력받은 아이디의 계정이 있는지 확인
         UserDto result = userMapper.login( userDto.getUid() );
         if( result == null ){ return null; }
-        // 2-2 :
-        //
-        //
+        // 2-2 : 만약에 입력받은 아이디의 계정이 존재하면, 입력받은 비밀번호화 암호화된 비밀번호 비교
+        // 평문비교가 아니므로 == equals 불가능하다.
+        // 암호분 비교방식인 .matches(비교할비밀번호 평문, 암호문)
         System.out.println("[ 평문 : 로그인시 입력받은 비밀번호 ]= " + userDto.getUpwd() );
         System.out.println("[ 암호문 : 회원가입시 입력받은 비밀번호 ] = " + result.getUpwd() );
-        boolean result2 = bcrypt
-        bcrypt.matches( userDto.getUpwd() , result.getUpwd() );
-        if( result2 == true ){  //
-            result.setUpwd( null ); //
+        boolean result2 = bcrypt.matches(userDto.getUpwd(), result.getUpwd() );
+        if( result2 == true ){  // 비밀번호가 일치하면 로그인 성공
+            result.setUpwd( null ); // 비밀번호 성공시 반환되는 계정에는 비밀번호 제외
             return result;
         }else { return null; }
     }
+
+    // 3. 내정보 조회
+    public UserDto myInfo( String uid ){
+        UserDto result = userMapper.myInfo(uid);
+        return result;
+    }
+
 }
 
 //회원의 비밀번호를 암호화
