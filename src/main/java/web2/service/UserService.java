@@ -19,7 +19,7 @@ public class UserService {
         // 1-3 : 회원가입 하기전에 비크립트를 이용한 비밀번호 암호화(사람이 이해하기 어려운 데이터로 변경) 하기
         // String 암호화된데이터 = bcrypt.encode(암호화된데이터);
         userDto.setUpwd( bcrypt.encode( userDto.getUpwd() ) ); // 1234 --> XXXXXXXXXXXXXXXXXXX
-        System.out.println("userDto = " + userDto);
+        System.out.println("[암호화 결과] = " + userDto.getUpwd());
 
         userMapper.signup(userDto); // mapper이용한 sql 처리
         if( userDto.getUno() > 0 ){ // 만약에 uno 생성되었다면 회원가입 SQL처리 성공
