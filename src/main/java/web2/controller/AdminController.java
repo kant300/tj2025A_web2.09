@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-    @GetMapping("/")
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "관리자 API 요청 성공";
+    }
 
 }
