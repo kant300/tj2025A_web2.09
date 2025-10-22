@@ -2443,3 +2443,5 @@ Unconditional classes:
 2025-10-22T10:51:44.137+09:00 DEBUG 7920 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@559ef6ca is alive
 2025-10-22T10:51:49.375+09:00 DEBUG 7920 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4d30d0c7 is alive
 2025-10-22T10:51:57.292+09:00 DEBUG 7920 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@5940dffc is alive
+2025-10-22T10:52:02.967+09:00 DEBUG 7920 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-10-22T10:52:02.967+09:00 DEBUG 7920 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
