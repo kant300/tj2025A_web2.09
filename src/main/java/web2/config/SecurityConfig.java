@@ -48,7 +48,7 @@ public class SecurityConfig {
         // http.oauth2Login(매개변수 -> 매개변수.successHandler( 로그인성공시특정클래스이동));
         http.oauth2Login( o -> o
                 .loginPage("/oauth2/authorization/goolgle")// 현재 서버의 로그인페이지가 아닌 타사 로그인 페이지 시용
-                .successHandler( oauth2SuccessHandler ) // 타사 로그인 페이지에서 로그인 성공시 반환되는 클래스 정의
+                .successHandler( oauth2SucessHandler ) // 타사 로그인 페이지에서 로그인 성공시 반환되는 클래스 정의
         );
 
         // ====================== 완료 ========================== //
