@@ -44,6 +44,13 @@ public class SecurityConfig {
         // http.addFilterBefore( 내가만든토큰객체필터, UsernamePasswordAuthenticationToken.class)
         http.addFilterBefore( jwtAuthFilter , UsernamePasswordAuthenticationFilter.class );
 
+        // [4] Oauth2 로그인 필터 사용 설정
+        // http.oauth2Login(매개변수 -> 매개변수.successHandler( 로그인성공시특정클래스이동));
+        http.oauth2Login( o -> o
+                .loginPage("/oauth2/authorization/goolgle")// 현재 서버의 로그인페이지가 아닌 타사 로그인 페이지 시용
+                .successHandler( oauth2SuccessHandler ) // 타사 로그인 페이지에서 로그인 성공시 반환되는 클래스 정의
+        );
+
         // ====================== 완료 ========================== //
         return http.build(); // 커스텀 완료된 객체 반환
     }
