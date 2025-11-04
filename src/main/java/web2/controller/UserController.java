@@ -11,6 +11,9 @@ import web2.model.dto.UserDto;
 import web2.service.JwtService;
 import web2.service.UserService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/user") // 공통URL 정의
 @RequiredArgsConstructor
@@ -105,5 +108,20 @@ public class UserController {
         // 쿠키 : 클라이언트에 저장하는 임시 저장소 이므로 서버가 종료되도 유지된다.
 
         return ResponseEntity.ok( true );
+    }
+
+    // 5. 권한을 반환하는 컨트롤러
+    @GetMapping("/check")
+    public ResponseEntity<?> checkToken( @CookieValue ( value = "loginUser", required = false ) String token ){
+        Map<String, Object > map = new HashMap<>();
+        if( token != null && jwtService.checkToken( token ) ){ // 쿠키내 토큰이 유효하면
+            String urole = jwtService.getUrole( token );
+            map.put("isAuth" , true );
+            map.put( "urole" , urole );
+            return ResponseEntity.status(200).body(map);    // 유저가 로그인했으면
+        }else{
+            map.put("isAuth" , false );
+            return ResponseEntity.status(403).body(map);    // 유저가 로그인 안했으면
+        }
     }
 }

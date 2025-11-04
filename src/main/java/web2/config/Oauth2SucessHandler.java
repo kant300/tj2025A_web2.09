@@ -10,12 +10,18 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import web2.service.JwtService;
+import web2.service.UserService;
 
 import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
 public class Oauth2SucessHandler implements AuthenticationSuccessHandler {
+
+    private final JwtService jwtService;    // JWT 서비스
+    private final UserService userService;
+
     // 1. 어느 타사의 로그인 성공 인지 확인
     // 2. 로그인 성공한 동의항목(정보) 가져오기, 개인정보(아이디, 회원명, 주소, 전화번호)
     // 3. 자사(우리)서버와 타사서버 통합 로그인( web2 : 토큰/쿠키 발급 )
@@ -47,18 +53,18 @@ public class Oauth2SucessHandler implements AuthenticationSuccessHandler {
             name = oauth2User.getAttribute("name");
         }
 
+        // [7] oauth2 정보를 데이터베이스 저장
+        userService.oauth2UserSighup( uid, name );
+
         // [5] 자사(우리)의 로그인 방식 통합
-        Cookie cookie = new Cookie("loginUser", jwtService.creatToken( uid, "USER"));
+        Cookie cookie = new Cookie("loginUser", jwtService.createToken( uid, "USER"));
         cookie.setHttpOnly(true); cookie.setSecure(false);
         cookie.setPath("/"); cookie.setMaxAge(60*60);
         response.addCookie(cookie);
 
         // [6] 로그인 성공시 어디로 이동할지 (프로트엔드 루트)
-        // response.sendRedirect("http://localhost:5173/"); // 리액트 서버
-        response.sendRedirect("/"); // 자바서버 메인 경로 localhost:8080
-
-
-
+        response.sendRedirect("http://localhost:5173/"); // 리액트 서버
+        // response.sendRedirect("/"); // 자바서버 메인 경로 localhost:8080
 
     } // m end
 }

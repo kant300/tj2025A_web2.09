@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,6 +20,8 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter; // 내가만든토큰을 시큐리티 토큰 방식을 통합한 클래스
 
+    private final Oauth2SucessHandler oauth2SuccessHandler;
+
     // !! : HTTP 관련 필터들을 커스텀 , HTTP는 요청과 응답 처리하는 웹 아키텍처
     @Bean // 빈 등록
     public SecurityFilterChain filterChain( HttpSecurity http ) throws Exception{
@@ -28,8 +31,8 @@ public class SecurityConfig {
         // .permitAll() : 모든 권한 (공개용) 허용
         // .hasRole("권한명"), .hasAnyRole("권한명","권한명");
         http.authorizeHttpRequests( auth -> auth
-                .requestMatchers("api/user/info").hasAnyRole("USER", "ADMIN")   // 2개이상 가능, 권한명은 대문자 권장
-                .requestMatchers("api/admin/**").hasRole("ADMIN")     //  admin 관련 controller는 "ADMIN"권한일때만 가능
+                .requestMatchers("/api/user/info").hasAnyRole("USER", "ADMIN")   // 2개이상 가능, 권한명은 대문자 권장
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")     //  admin 관련 controller는 "ADMIN"권한일때만 가능
                 .requestMatchers("/**").permitAll() ); // 모든 권한 허용은 항상 최하단에 정의한다.
 
         // [2] HTTP 요청에 csrf( 요청간의 해킹 공격 ) POST,PUT 자동 차단 커스텀
@@ -47,9 +50,12 @@ public class SecurityConfig {
         // [4] Oauth2 로그인 필터 사용 설정
         // http.oauth2Login(매개변수 -> 매개변수.successHandler( 로그인성공시특정클래스이동));
         http.oauth2Login( o -> o
-                .loginPage("/oauth2/authorization/goolgle")// 현재 서버의 로그인페이지가 아닌 타사 로그인 페이지 시용
-                .successHandler( oauth2SucessHandler ) // 타사 로그인 페이지에서 로그인 성공시 반환되는 클래스 정의
+                .loginPage("/oauth2/authorization/google")// 현재 서버의 로그인페이지가 아닌 타사 로그인 페이지 시용
+                .successHandler( oauth2SuccessHandler ) // 타사 로그인 페이지에서 로그인 성공시 반환되는 클래스 정의
         );
+
+        // [5] 시큐리티의 CORS 정책을 기본(우리가 설정한 CorsConfig 클래스 ) 설정하기
+        http.cors(Customizer.withDefaults());
 
         // ====================== 완료 ========================== //
         return http.build(); // 커스텀 완료된 객체 반환
