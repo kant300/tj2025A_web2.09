@@ -1,23 +1,18 @@
-package example2.실습.실습2;
+package example2.실습.실습3._연관;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 
 @SpringBootApplication
-@EnableWebSecurity // JPA 감시(auditing)를 사용
+@EnableWebSecurity
 @EnableJpaAuditing
 public class AppStart {
     public static void main(String[] args) {
-        SpringApplication.run( example2.day02.AppStart.class );
-    }
-    @Bean // 특정한 경로는 시큐리티 무시.
-    public WebSecurityCustomizer webSecurityCustomizer(){
-        return (web)-> web.ignoring()
-                .requestMatchers("/api/movie/**");
+        SpringApplication.run( AppStart.class );
     }
 }

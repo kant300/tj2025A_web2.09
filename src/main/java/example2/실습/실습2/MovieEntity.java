@@ -9,18 +9,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table( name = "movie" )
 @Data@NoArgsConstructor@AllArgsConstructor@Builder
-public class MovieEntity {
+public class MovieEntity extends BaseTime{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY ) // auto_increment 주입 :: MYSQL 만 가능
     private int movieId;    // 영화번호
 
     @Column( nullable = false , length = 100 )
     private String title;   // 영화제목
-
-    @Column( nullable = false , length = 50 )
     private String director;    // 감독
-
-
     private String releaseDate; // 개봉일
-    private int rating;     // 평점
+    private Double rating;     // 평점
+
+    // Entity -> DTO 변환 메서드
+    public MovieDto toDto() {
+        return MovieDto.builder()
+                .movieId(this.movieId)
+                .title(this.title)
+                .director(this.director)
+                .releaseDate(this.releaseDate)
+                .rating(this.rating)
+                .createdAt(this.getCreatedAt().toString())
+                .updatedeAt(this.getUpdatedAt().toString())
+                .build();
+    }
 }
