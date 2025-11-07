@@ -1,6 +1,6 @@
 package example2.실습.실습2;
 
-import example.movie.model.dto.MovieDto;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
