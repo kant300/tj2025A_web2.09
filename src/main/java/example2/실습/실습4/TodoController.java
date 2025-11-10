@@ -1,22 +1,22 @@
-package example2.실습.실습4;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequestMapping("/api/todo")
-@RequiredArgsConstructor
-public class TodoController {
-    private final TodoService todoService;
-
-    @PostMapping
-    public ResponseEntity<?> createTodo(@RequestBody TodoDto todoDto){
-        return ResponseEntity.ok(todoService.createTodo(todoDto));
-    }
-    @GetMapping("/list")
-    public ResponseEntity<?> getTodoList(){
-        return ResponseEntity.ok(todoService.getTodoList());
-    }
-
-}
+//package example2.실습.실습4;
+//
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.*;
+//
+//@RestController
+//@RequestMapping("/api/todo")
+//@RequiredArgsConstructor
+//public class TodoController {
+//    private final TodoService todoService;
+//
+//    @PostMapping
+//    public ResponseEntity<?> createTodo(@RequestBody TodoDto todoDto){
+//        return ResponseEntity.ok(todoService.createTodo(todoDto));
+//    }
+//    @GetMapping("/list")
+//    public ResponseEntity<?> getTodoList(){
+//        return ResponseEntity.ok(todoService.getTodoList());
+//    }
+//
+//}
