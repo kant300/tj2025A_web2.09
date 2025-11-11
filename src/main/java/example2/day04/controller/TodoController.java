@@ -50,5 +50,11 @@ public class TodoController {
         return ResponseEntity.ok( todoService.page( page, size ));
     }
 
+    // [5] 2-5
+    @GetMapping("/page2")
+    public ResponseEntity<?> page2( @RequestParam String keyword, @RequestParam int page, @RequestParam int size ){
+        return ResponseEntity.ok(todoService.page2( keyword, page, size));
+    }
+
 
 } // class end
